@@ -128,14 +128,19 @@ def show_book_list_display():
 	cursor.execute("SELECT * FROM books")
 	books = cursor.fetchall()
 	invalid_option_flag = False
+	each_column_max_length = [0, 0, 0, 0]
 
 	for i in range(len(books)):
 		books[i] = list(books[i])
 	for book in books:
+		book[0] = str(book[0])
 		if book[3]:
 			book[3] = "Yes"
 		else:
 			book[3] = "No"
+		for i in range(len(book)):
+			if len(book[i]) > each_column_max_length[i]:
+				each_column_max_length[i] = len(book[i])
 
 	while running:
 		system("cls")
@@ -144,11 +149,10 @@ def show_book_list_display():
 
 		print("BOOK LIST\n")
 		print("Q. Go Back\n")
-		print("Sno.\t\tTitle\t\tAuthor\t\tAvailable\n")
+		print(" | Sno. | Title" + " "*(each_column_max_length[1]-5) +" | Author" + " "*(each_column_max_length[2]-6) + " | Available |")
+		print(" |------|-" + "-"*each_column_max_length[1] + "-|-" + "-"*each_column_max_length[2] + "-|-----------|")
 		for book in books:
-			for data in book:
-				print(data, end="\t\t")
-			print()
+			print(" | " + book[0] + " "*(4-len(book[0])) + " | " + book[1] + " " * (each_column_max_length[1] - len(book[1])) + " | " + book[2] + " " * (each_column_max_length[2] - len(book[2])) + " | " + book[3] + " " * (9-len(book[3])) + " |")
 		option = getwch()
 		if option == "q":
 			return
