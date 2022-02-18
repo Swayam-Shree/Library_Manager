@@ -21,6 +21,7 @@ def initiate_sql_connection():
 		)
 	except:
 		print("\033[38;2;255;0;0mInvalid Password or a Mysql server does not exist.\033[0m\n")
+		getch()
 		exit()
 
 initiate_sql_connection()
