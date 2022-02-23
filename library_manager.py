@@ -1,7 +1,16 @@
+print("Loading...")
+
 from os import system, path
-import mysql.connector as sql
 from msvcrt import getch, getwch
 import pickle
+
+try:
+	import mysql.connector as sql
+except:
+	system("cls")
+	print("\033[38;2;255;0;0mMysql connector not installed.\033[0m\n")
+	getch()
+	exit()
 
 running = True
 account_creation_flag = False
