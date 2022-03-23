@@ -114,7 +114,7 @@ def return_book_display():
 		if option == "2":
 			cursor.execute("UPDATE books SET Available = TRUE, Issued_To = '' WHERE SNO = %s", (book_id,))
 			sql_db.commit()
-			book_remove_success_flag = True
+			book_return_success_flag = True
 			return
 		elif option == "q":
 			return
@@ -317,6 +317,8 @@ def account(username, is_admin):
 			book_add_success_flag = False
 			book_remove_success_flag = False
 			invalid_option_flag = False
+			book_issue_success_flag = False
+			book_return_success_flag = False
 
 			if option == "1":
 				add_book_display()
